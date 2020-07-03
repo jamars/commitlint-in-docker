@@ -10,10 +10,11 @@
 #
 # docker run --mount type=bind,source=${PWD}/.git,target=/app/.git \
 #    type=bind,source=${PWD}/commitlint.config.js,target=/app/commitlint.config.js \
-#    jars-commitlint:0.1.0 sh -c 'commitlint -e'
+#    jamars-commitlint:0.1.0 sh -c 'commitlint -e'
 
 RED='\033[0;31m'
 GREEN='\033[1;32m'
+YELLOW='\033[0;33m'
 NOCOLOR='\033[0m'
 
 result=0
@@ -21,10 +22,12 @@ result=0
 docker version > /dev/null 2>&1
 if [ $? == 0 ]; then
   docker run --mount type=bind,source=${PWD}/.git,target=/app/.git\
-    jars-commitlint:0.1.0 sh -c 'commitlint -e'
+    jamars-commitlint:0.1.0 sh -c 'commitlint -e'
   result=$?
   if [ $result != 0 ]; then
     echo -e "${RED}Invalid commit message!${NOCOLOR}"
     exit $result
   fi
+else
+  echo -e "${YELLOW}Please install docker to enable commitlint-in-docker${NOCOLOR}"
 fi
