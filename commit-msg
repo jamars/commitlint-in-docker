@@ -22,7 +22,7 @@ result=0
 docker version > /dev/null 2>&1
 if [ $? == 0 ]; then
   docker run --mount type=bind,source=${PWD}/.git,target=/app/.git\
-    jamars-commitlint:0.1.0 sh -c 'commitlint -e'
+    jamars-commitlint:0.1.2 sh -c 'commitlint -e'
   result=$?
   if [ $result != 0 ]; then
     echo -e "${RED}Invalid commit message!${NOCOLOR}"
